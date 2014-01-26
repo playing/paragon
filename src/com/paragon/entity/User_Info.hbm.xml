@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping >
+ <class catalog="shortrent" name="com.paragon.entity.User_Info" table="User_Info">
+ <id name="User_ID" column="User_ID"> 
+     <generator class="identity"></generator>
+ </id>
+ <property name="User_Phone" column="User_Phone"></property>
+ <property name="User_TName" column="User_TName"></property>
+ <property name="User_Address" column="User_Address"></property>
+ <property name="Sex" column="Sex"></property>
+ </class>	
+</hibernate-mapping>

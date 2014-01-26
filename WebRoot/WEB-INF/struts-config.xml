@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans >
+    <form-bean name="loginForm" type="com.paragon.struts.form.LoginForm" />
+    <form-bean name="registForm" type="com.paragon.struts.form.RegistForm"/>
+    <form-bean name="publishForm" type="com.paragon.struts.form.PublishForm"/>
+    <form-bean name="searchForm" type="com.paragon.struts.form.SearchForm" />
+    <form-bean name="house_exInfoForm" type="com.paragon.struts.form.House_exInfoForm" />
+  </form-beans>
+
+  <global-exceptions />
+  <global-forwards >
+    <forward name="success" path="/success.jsp" />
+    <forward name="fail" path= "/fail.jsp"/>  
+  </global-forwards>
+
+  <action-mappings >
+    <action
+      attribute="loginForm"
+      input="/login.jsp"
+      name="loginForm"
+      parameter="method"
+      path="/login"
+      scope="request"
+      type="com.paragon.struts.action.LoginAction" />
+
+    <action
+      attribute="registForm"
+      input="/regist.jsp"
+      name="registForm"
+      parameter="method"
+      path="/regist"
+      scope="request"
+      type="com.paragon.struts.action.RegistAction" />
+      
+      <action
+      attribute="publishForm"
+      input="/house_release.jsp"
+      name="publishForm"
+      parameter="method"
+      path="/publish"
+      scope="request"
+      type="com.paragon.struts.action.PublishAction" />
+    <action
+      path="/search"
+      attribute="searchForm"
+      name="searchForm"
+      scope="request"
+      type="com.paragon.struts.action.SearchAction" />
+    <action
+      attribute="house_exInfoForm"
+      input="/house_detail.jsp"
+      name="house_exInfoForm"
+      parameter="method"
+      path="/house_exInfo"
+      scope="request"
+      type="com.paragon.struts.action.House_exInfoAction" />
+      
+  </action-mappings>
+  
+    
+
+
+  <message-resources parameter="com.paragon.struts.ApplicationResources" />
+</struts-config>
+
