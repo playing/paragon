@@ -3,7 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping >
- <class catalog="shortrent" name="com.paragon.entity.User_Info" table="User_Info">
+ <class catalog="shortrent" name="com.paragon.entity.User_Info" table="user_info">
  <id name="User_ID" column="User_ID"> 
      <generator class="identity"></generator>
  </id>

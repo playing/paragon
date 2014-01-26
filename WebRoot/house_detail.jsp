@@ -8,14 +8,12 @@
 	function init() {
 		check_cookie();
 		var house_id=getCookie('house_id');
-		
 		  $.ajax({
         type: "post",
         url: "house_exInfo.do",
         data: "house_id="+house_id,
         success: function(data) {
        data=JSON.parse(data);
-      
         var user_tname=data.House_ExtraInfo[0].user[0].user_tname;
         var user_phone=data.House_ExtraInfo[0].user[0].user_phone;
         var user_address=data.House_ExtraInfo[0].user[0].user_address;
@@ -24,6 +22,62 @@
         var bed_num=data.House_ExtraInfo[0].house[0].bed_num;
         var toilet_num=data.House_ExtraInfo[0].house[0].toilet_num;
         var facilities=data.House_ExtraInfo[0].house[0].facilities;
+        var house_address=data.House_ExtraInfo[0].house_info[0].address;
+        var house_intro=data.House_ExtraInfo[0].house_info[0].houseaddress;
+        var house_price=data.House_ExtraInfo[0].house_info[0].price;
+        var house_area=data.House_ExtraInfo[0].house_info[0].houseArea;
+        var house_check_out_time=data.House_ExtraInfo[0].house_info[0].checkOutTime;
+        var house_check_in_time=data.House_ExtraInfo[0].house_info[0].checkInTime;
+        var house_renttype=data.House_ExtraInfo[0].house_info[0].rentType;
+        var house_type=data.House_ExtraInfo[0].house_info[0].houseType;
+        var house_livenum=data.House_ExtraInfo[0].house_info[0].livenum;
+        var house_bedroomnum=data.House_ExtraInfo[0].house_info[0].bedroomNum;
+        var house_picture=data.House_ExtraInfo[0].house_info[0].picture;
+        var house_type_str="";
+        var rent_type_str="";
+             if(house_type==0){
+              house_type_str="旅馆";
+             }else{
+              if(house_type==3){
+              house_type_str="别墅";}
+              else{
+              house_type_str="公寓";}
+             }
+        
+           if(rent_type==0){
+              rent_type_str="单间出租";
+             }else{
+              if(rent_type==3){
+              rent_type_str="整套出租";}
+              else{
+              rent_type_str="床位出租";}
+             }
+             $("#house_picture").attr("src", house_picture);
+             $("#house_address").text(house_address);
+             $("#house_type").text(house_type_str);
+             $("#rent_type").text(rent_type_str);
+             $("#house_area").text(house_area);
+             $("#house_price").text(house_price);
+             $("#check_in_time").text(house_check_in_time);
+             $("#check_out_time").text(house_check_out_time);
+             $("#bedroom_num").text(house_bedroomnum);
+             $("#live_num").text(house_livenum);
+             $("#bed_num").text(bed_num);
+             $("#toilet_num").text(toilet_num);
+             $("#user_tname").text(user_tname);
+             $("#user_address").text(user_address);
+             $("#user_phone").text(user_phone);
+             var facilitiesArray =facilities.split("#");
+              for(i=0;i<=8;i++){
+              if(facilitiesArray[i]!=""){
+               $("#detail_table tr:odd td:eq("+i+")").html("<span class=\"glyphicon glyphicon-ok\"></span>"); 
+               
+              }
+              else{
+               $("#detail_table tr:odd td:eq("+i+")").html("<span class=\"glyphicon glyphicon-remove\"></span>"); 
+              }
+              }
+
         }
         });
 	}
@@ -40,7 +94,7 @@
 			<div class="row">
 				<div class="col-md-6">
 
-					<img src="http://img.ea3w.com/article/1/879/licYUXlN8R8ZM.jpg" class="img-rounded">
+					<img src="" class="img-rounded img-responsive" id="house_picture">
 				</div>
 				<div class="col-md-3" style="margin-top: 40px">
 					<div class="form-group">
@@ -48,8 +102,8 @@
 							详细地址:
 						</label>
 						<div>
-							<p class="form-control-static">
-								武汉市华中科技大学
+							<p class="form-control-static" id="house_address">
+								
 							</p>
 						</div>
 					</div>
@@ -58,8 +112,8 @@
 							房屋类型:
 						</label>
 						<div>
-							<p class="form-control-static">
-								公寓
+							<p class="form-control-static" id="house_type">
+								
 							</p>
 						</div>
 					</div>
@@ -68,8 +122,8 @@
 							出租类型:
 						</label>
 						<div>
-							<p class="form-control-static">
-								单间出租
+							<p class="form-control-static" id="rent_type">
+								
 							</p>
 						</div>
 					</div>
@@ -78,8 +132,8 @@
 							房屋面积:
 						</label>
 						<div>
-							<p class="form-control-static">
-								85
+							<p class="form-control-static" id="house_area">
+								
 							</p>
 						</div>
 					</div>
@@ -88,8 +142,8 @@
 							房屋价格:
 						</label>
 						<div>
-							<p class="form-control-static">
-								3000
+							<p class="form-control-static" id="house_price">
+								
 							</p>
 						</div>
 					</div>
@@ -98,8 +152,8 @@
 							入住时间:
 						</label>
 						<div>
-							<p class="form-control-static">
-								2014-1-17
+							<p class="form-control-static" id="check_in_time">
+								
 							</p>
 						</div>
 					</div>
@@ -108,8 +162,8 @@
 							退房时间:
 						</label>
 						<div>
-							<p class="form-control-static">
-								2014-1-20
+							<p class="form-control-static" id="check_out_time">
+								
 							</p>
 						</div>
 					</div>
@@ -120,18 +174,18 @@
 							卧室数量:
 						</label>
 						<div>
-							<p class="form-control-static">
-								2
+							<p class="form-control-static" id="bedroom_num">
+								
 							</p>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class=" control-label">
+						<label class=" control-label" >
 							可住人数:
 						</label>
 						<div>
-							<p class="form-control-static">
-								3
+							<p class="form-control-static" id="live_num">
+								
 							</p>
 						</div>
 					</div>
@@ -140,8 +194,8 @@
 							床铺数量:
 						</label>
 						<div>
-							<p class="form-control-static">
-								1
+							<p class="form-control-static" id="bed_num">
+								
 							</p>
 						</div>
 					</div>
@@ -150,8 +204,8 @@
 							卫生间数量:
 						</label>
 						<div>
-							<p class="form-control-static">
-								2
+							<p class="form-control-static" id="toilet_num">
+								
 							</p>
 						</div>
 					</div>
@@ -159,7 +213,7 @@
 			</div>
 			<div class="table-responsive">
 				<table class="table table-bordered">
-					<tbody>
+					<tbody id="detail_table">
 						<tr>
 							<td>
 								电视
@@ -176,16 +230,16 @@
 						</tr>
 						<tr>
 							<td>
-								<span class="glyphicon glyphicon-ok"></span>
+								
 							</td>
 							<td>
-								<span class="glyphicon glyphicon-ok"></span>
+								
 							</td>
 							<td>
-								<span class="glyphicon glyphicon-remove"></span>
+								
 							</td>
 							<td>
-								<span class="glyphicon glyphicon-ok"></span>
+								
 							</td>
 						</tr>
 						<tr>
@@ -204,16 +258,16 @@
 						</tr>
 						<tr>
 							<td>
-								<span class="glyphicon glyphicon-remove"></span>
+								
 							</td>
 							<td>
-								<span class="glyphicon glyphicon-ok"></span>
+								
 							</td>
 							<td>
-								<span class="glyphicon glyphicon-ok"></span>
+								
 							</td>
 							<td>
-								<span class="glyphicon glyphicon-remove"></span>
+								
 							</td>
 						</tr>
 					</tbody>
@@ -225,14 +279,26 @@
 				</h1>
 			</div>
 			<div class="row">
+			<div class="col-md-4">
+					<div class="form-group">
+						<label class=" control-label">
+							出租人姓名:
+						</label>
+						<div>
+							<p class="form-control-static" id="user_tname">
+								
+							</p>
+						</div>
+					</div>
+				</div>
 				<div class="col-md-4">
 					<div class="form-group">
 						<label class=" control-label">
 							出租人电话:
 						</label>
 						<div>
-							<p class="form-control-static">
-								18109352189
+							<p class="form-control-static" id="user_phone">
+								
 							</p>
 						</div>
 					</div>
@@ -243,12 +309,13 @@
 							出租人地址:
 						</label>
 						<div>
-							<p class="form-control-static">
-								武汉市华中科技大学
+							<p class="form-control-static" id="user_address">
+								
 							</p>
 						</div>
 					</div>
 				</div>
+				
 			</div>
 			<button class="btn btn-lg btn-danger center-block"
 				onclick="{location.href='house_info.jsp'}">

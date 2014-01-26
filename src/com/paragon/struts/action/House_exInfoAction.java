@@ -19,9 +19,11 @@ import org.apache.struts.action.ActionMapping;
 import org.json.JSONArray;
 
 import com.paragon.dao.HouseExtrainfoDAO;
+import com.paragon.dao.HouseInfoDAO;
 import com.paragon.dao.UserConnHouseDAO;
 import com.paragon.dao.User_InfoDAO;
 import com.paragon.entity.HouseExtrainfo;
+import com.paragon.entity.HouseInfo;
 import com.paragon.entity.User_Info;
 import com.paragon.struts.form.House_exInfoForm;
 
@@ -72,7 +74,10 @@ public class House_exInfoAction extends Action {
 		//queryById
 		HouseExtrainfo hou_detail = new HouseExtrainfo();
 		hou_detail = hou_info.queryById(i);
-		
+		//查询房屋基本信息
+		HouseInfo house = new HouseInfo();
+		HouseInfoDAO housedao = new HouseInfoDAO();
+		house=housedao.queryById(i);
 		
 		JSONArray result = new JSONArray();
 		
@@ -89,14 +94,30 @@ public class House_exInfoAction extends Action {
 		Map hinfo = new HashMap();
 		hinfo.put("facilities", hou_detail.getFacilities());
 		hinfo.put("bed_num", hou_detail.getBedNum());
-		hinfo.put("toilet_num", hou_detail.getToiletNum());;
+		hinfo.put("toilet_num", hou_detail.getToiletNum());
 		hinfo.put("room_describe", hou_detail.getRoomDescribe());
 		JSONArray hinfoJson = new JSONArray();
 		hinfoJson.put(hinfo);
 		
+		Map houseinfo = new HashMap();
+		houseinfo.put("address", house.getHouseAddress());
+		houseinfo.put("intro", house.getHouseIntro());
+		houseinfo.put("price", house.getHousePrice());
+		houseinfo.put("livenum", house.getLiveNum());
+		houseinfo.put("picture", house.getHousePicture());
+		houseinfo.put("checkInTime", house.getCheckInTime());
+		houseinfo.put("checkOutTime", house.getCheckOutTime());
+		houseinfo.put("houseType", house.getHouseType());
+		houseinfo.put("rentType", house.getRentType());
+		houseinfo.put("houseArea", house.getHouseArea());
+		houseinfo.put("bedroomNum", house.getBedroomNum());
+		JSONArray houseinfoJson = new JSONArray();
+		houseinfoJson.put(houseinfo);
+		
 		Map result_map = new HashMap();
 		result_map.put("user", uinfoJson);
 		result_map.put("house", hinfoJson);
+		result_map.put("house_info", houseinfoJson);
 //		Map map_result = new HashMap();
 //		map_result.put("user_infor", uinfo);
 //		map_result.put("house_detail", hinfo);	
