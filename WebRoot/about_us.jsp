@@ -60,7 +60,7 @@
 					<div class="page-header">
 						<h1 id="project">项目介绍</h1>
 					</div>
-					<p class="lead">轻松短租网,意在为用户提供方便快捷的一站式租房服务,让您高效的找到自己想找打房间.</p>
+					<p class="lead">轻松短租网,意在为用户提供方便快捷的一站式租房服务,让您高效的找到自己想找的房间.</p>
 				
 				</div>
 				<div class="bs-docs-section">
